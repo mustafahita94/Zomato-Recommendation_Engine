@@ -35,7 +35,10 @@ export function RecommendationList({
   const fallbackBit = response.meta.used_fallback ? " · fallback" : "";
 
   return (
-    <main aria-labelledby="results-heading" className="flex flex-col gap-gutter-lg">
+    <main
+      aria-labelledby="results-heading"
+      className="flex animate-fade-up flex-col gap-gutter-lg"
+    >
       <div className="flex flex-wrap items-baseline justify-between gap-gutter-sm">
         <h2
           id="results-heading"
@@ -43,9 +46,7 @@ export function RecommendationList({
         >
           {heading}
         </h2>
-        <span className="font-mono text-mono-sm tabular-nums text-on-surface-muted">
-          {sortLabel}
-        </span>
+        <span className="chip tabular-nums">{sortLabel}</span>
       </div>
 
       {response.is_empty || count === 0 ? (
@@ -66,16 +67,17 @@ export function RecommendationList({
           ) : null}
 
           <div className="flex flex-col gap-gutter-md">
-            {response.recommendations.map((item) => (
+            {response.recommendations.map((item, index) => (
               <RecommendationCard
                 key={`${item.rank}-${item.restaurant_id ?? item.name}`}
                 item={item}
                 mutedExplain={response.meta.used_fallback}
+                index={index}
               />
             ))}
           </div>
 
-          <footer className="flex flex-wrap items-center justify-between gap-gutter-sm border-t border-outline pt-gutter-sm">
+          <footer className="flex flex-wrap items-center justify-between gap-gutter-sm border-t border-white/10 pt-gutter-md">
             <p className="font-mono text-mono-sm tabular-nums text-on-surface-muted">
               {response.meta.candidates_considered} candidates considered ·{" "}
               {filters} · {latency}

@@ -8,7 +8,7 @@ export function ErrorBanner({ title, message }: ErrorBannerProps) {
     <div
       role="region"
       aria-label="Error banner"
-      className="flex items-start gap-gutter-md rounded-lg border border-error/40 bg-error-container/40 p-gutter-lg"
+      className="flex items-start gap-gutter-md rounded-lg border border-error/40 bg-error-container/50 p-gutter-lg backdrop-blur-sm"
     >
       <span
         className="material-symbols-outlined mt-0.5 shrink-0 text-headline-md text-error"

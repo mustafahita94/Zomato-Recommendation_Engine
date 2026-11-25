@@ -11,7 +11,7 @@ export function FallbackBanner({
     <div
       role="region"
       aria-label="Fallback mode notice"
-      className="flex items-start gap-gutter-md rounded-md border border-secondary/30 bg-secondary-container/50 p-gutter-md"
+      className="flex items-start gap-gutter-md rounded-md border border-secondary/35 bg-secondary-container/50 p-gutter-md"
     >
       <span
         className="material-symbols-outlined mt-0.5 shrink-0 text-headline-md text-secondary"

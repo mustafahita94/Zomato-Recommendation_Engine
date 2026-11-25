@@ -14,51 +14,65 @@ export function StatusPanel({
   groqConnected,
 }: StatusPanelProps) {
   return (
-    <aside className="w-full lg:col-span-4">
-      <article className="flex flex-col gap-gutter-sm rounded-md border border-outline bg-surface p-gutter-md">
-        <header className="flex items-center justify-between border-b border-outline pb-gutter-xs">
+    <aside className="w-full animate-fade-up stagger-2 lg:col-span-4">
+      <article className="glass-panel flex flex-col gap-gutter-md rounded-lg p-gutter-lg">
+        <header className="flex items-center justify-between gap-gutter-sm">
           <h2 className="font-label text-label-lg text-on-surface">
-            Catalog &amp; LLM
+            Live catalog
           </h2>
-          <div className="flex items-center gap-gutter-xs">
+          <span className="chip">
             <span
               role="status"
               aria-label={groqConnected ? "Connected" : "Fallback mode"}
               className={`inline-block h-2 w-2 rounded-full ${
-                groqConnected ? "bg-success" : "bg-secondary"
+                groqConnected
+                  ? "animate-soft-pulse bg-success shadow-[0_0_10px_rgba(74,222,128,0.7)]"
+                  : "bg-secondary"
               }`}
             />
             <span
-              className={`font-label text-label-sm ${
+              className={
                 groqConnected ? "text-success" : "text-secondary"
-              }`}
+              }
             >
-              {groqConnected ? "Connected" : "Fallback mode"}
+              {groqConnected ? "Groq live" : "Fallback"}
             </span>
-          </div>
+          </span>
         </header>
-        <div className="flex flex-col gap-gutter-xs">
-          <div className="flex items-center justify-between">
+
+        <div className="grid grid-cols-2 gap-gutter-sm">
+          <div className="rounded-md border border-white/10 bg-black/30 p-gutter-md">
+            <p className="font-label text-label-sm text-on-surface-muted">
+              Places
+            </p>
+            <p className="mt-gutter-xs font-display text-headline-md tabular-nums text-on-surface">
+              {catalogSize.toLocaleString()}
+            </p>
+          </div>
+          <div className="rounded-md border border-white/10 bg-black/30 p-gutter-md">
+            <p className="font-label text-label-sm text-on-surface-muted">
+              Areas
+            </p>
+            <p className="mt-gutter-xs font-display text-headline-md tabular-nums text-on-surface">
+              {locationCount}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-gutter-xs border-t border-white/10 pt-gutter-md">
+          <div className="flex items-center justify-between gap-gutter-sm">
             <span className="font-label text-label-sm text-on-surface-muted">
-              Catalog size
+              Cuisines
             </span>
             <span className="font-mono text-mono-sm tabular-nums text-on-surface">
-              {catalogSize.toLocaleString()} places
+              {cuisineCount}
             </span>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-gutter-sm">
             <span className="font-label text-label-sm text-on-surface-muted">
-              Locations · Cuisines
+              Model
             </span>
-            <span className="font-mono text-mono-sm tabular-nums text-on-surface">
-              {locationCount} · {cuisineCount}
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="font-label text-label-sm text-on-surface-muted">
-              LLM model
-            </span>
-            <span className="font-mono text-mono-sm text-on-surface">
+            <span className="truncate font-mono text-mono-sm text-accent">
               {llmModel}
             </span>
           </div>

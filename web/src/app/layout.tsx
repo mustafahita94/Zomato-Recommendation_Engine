@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Outfit, Sora, Space_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Space_Mono, Syne } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({
+const syne = Syne({
   subsets: ["latin"],
-  variable: "--font-outfit",
-  weight: ["400", "500", "600"],
+  variable: "--font-syne",
+  weight: ["600", "700", "800"],
 });
 
-const sora = Sora({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-sora",
-  weight: ["600"],
+  variable: "--font-jakarta",
+  weight: ["400", "500", "600", "700"],
 });
 
 const spaceMono = Space_Mono({
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${outfit.variable} ${sora.variable} ${spaceMono.variable} font-body antialiased`}
+        className={`${syne.variable} ${jakarta.variable} ${spaceMono.variable} font-body antialiased`}
       >
         {children}
       </body>

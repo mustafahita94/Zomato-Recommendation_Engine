@@ -38,7 +38,7 @@ function pickDefaultLocation(locations: string[], preferred?: string): string {
 }
 
 const fieldClass =
-  "w-full rounded bg-surface-input border border-outline-strong text-on-surface font-body text-body-md px-gutter-md py-gutter-sm focus:border-primary focus:ring-1 focus:ring-primary transition-colors duration-state-change outline-none";
+  "w-full rounded-md border border-white/10 bg-surface-input/90 px-gutter-md py-gutter-sm font-body text-body-md text-on-surface outline-none transition-colors duration-state-change focus:border-primary focus:ring-1 focus:ring-primary";
 
 export function PreferencesForm({
   locations,
@@ -70,7 +70,7 @@ export function PreferencesForm({
   return (
     <section
       aria-labelledby="preferences-heading"
-      className="flex flex-col gap-gutter-lg rounded-lg border border-outline-strong bg-surface p-gutter-lg sm:p-gutter-xl"
+      className="glass-panel flex animate-fade-up flex-col gap-gutter-lg rounded-lg p-gutter-lg sm:p-gutter-xl"
     >
       <div className="flex flex-wrap items-center justify-between gap-gutter-sm">
         <h2
@@ -79,9 +79,7 @@ export function PreferencesForm({
         >
           Search preferences
         </h2>
-        <span className="font-label text-label-sm text-on-surface-muted">
-          Zomato Bangalore dataset · Groq ranking
-        </span>
+        <span className="chip">Zomato · Groq ranking</span>
       </div>
 
       <form
@@ -161,7 +159,7 @@ export function PreferencesForm({
               <span className="font-label text-label-lg text-on-surface">
                 Minimum rating
               </span>
-              <span className="rounded-full border border-outline bg-surface-elevated px-gutter-sm py-gutter-xs font-mono text-mono-sm tabular-nums text-secondary">
+              <span className="rounded-full border border-primary/30 bg-primary/10 px-gutter-sm py-gutter-xs font-mono text-mono-sm tabular-nums text-accent">
                 {minRating.toFixed(1)}
               </span>
             </div>
@@ -204,11 +202,7 @@ export function PreferencesForm({
             </span>
           </label>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="inline-flex w-full items-center justify-center rounded bg-primary px-gutter-lg py-gutter-md font-label text-label-lg text-on-primary transition-transform duration-state-change ease-state-change hover:brightness-95 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-60"
-          >
+          <button type="submit" disabled={loading} className="btn-primary w-full">
             {loading ? "Finding matches…" : "Get recommendations"}
           </button>
         </div>

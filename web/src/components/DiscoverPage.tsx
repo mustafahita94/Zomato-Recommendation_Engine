@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { fetchMeta, postRecommend } from "@/lib/api";
 import type { CatalogMeta, RecommendationResponse } from "@/lib/types";
 import { AppHeader } from "./AppHeader";
@@ -12,8 +12,17 @@ import {
 } from "./PreferencesForm";
 import { RecommendationList } from "./RecommendationList";
 import { StatusPanel } from "./StatusPanel";
+import { TopNav } from "./TopNav";
 
 const ANY_CUISINE = "Any cuisine";
+
+function PageShell({ children }: { children: ReactNode }) {
+  return (
+    <div className="mx-auto flex min-h-screen max-w-content flex-col px-gutter-md pb-section pt-gutter-md sm:px-page-margin sm:pt-gutter-lg">
+      {children}
+    </div>
+  );
+}
 
 export function DiscoverPage() {
   const [meta, setMeta] = useState<CatalogMeta | null>(null);
@@ -87,89 +96,99 @@ export function DiscoverPage() {
 
   if (loadingMeta) {
     return (
-      <div className="mx-auto flex min-h-screen max-w-content flex-col gap-section px-gutter-md py-gutter-xl sm:px-page-margin sm:py-section">
-        <AppHeader
-          title="Discover places worth the trip"
-          subtitle="Loading Bangalore catalog…"
-        />
-        <p className="font-body text-body-md text-on-surface-muted">
-          Connecting to the recommendation API…
-        </p>
-      </div>
+      <PageShell>
+        <TopNav />
+        <div className="flex flex-col gap-section">
+          <AppHeader
+            title="Places worth the trip"
+            subtitle="Loading Bangalore catalog…"
+          />
+          <div className="glass-panel h-28 animate-pulse rounded-lg" />
+          <p className="font-mono text-mono-sm text-on-surface-muted">
+            Connecting to the recommendation API…
+          </p>
+        </div>
+      </PageShell>
     );
   }
 
   if (metaError || !meta) {
     return (
-      <div className="mx-auto flex min-h-screen max-w-content flex-col gap-section px-gutter-md py-gutter-xl sm:px-page-margin sm:py-section">
-        <AppHeader
-          kicker="Setup needed"
-          title="Restaurant catalog missing"
-          subtitle="Graceful recovery when the API or processed dataset is unavailable."
-        />
-        <ErrorBanner
-          title="Restaurant catalog missing or failed to load"
-          message={
-            metaError ||
-            "Unable to read the Bangalore Zomato catalog. Ensure the API is running and the processed dataset exists, then refresh."
-          }
-        />
-        <button
-          type="button"
-          onClick={() => void loadMeta()}
-          className="inline-flex w-fit items-center justify-center rounded border border-error/50 px-gutter-md py-gutter-sm font-label text-label-lg text-error transition-colors duration-state-change hover:bg-error-container"
-        >
-          Retry load
-        </button>
-      </div>
+      <PageShell>
+        <TopNav groqConnected={false} />
+        <div className="flex flex-col gap-section">
+          <AppHeader
+            kicker="Setup needed"
+            title="Restaurant catalog missing"
+            subtitle="Graceful recovery when the API or processed dataset is unavailable."
+          />
+          <ErrorBanner
+            title="Restaurant catalog missing or failed to load"
+            message={
+              metaError ||
+              "Unable to read the Bangalore Zomato catalog. Ensure the API is running and the processed dataset exists, then refresh."
+            }
+          />
+          <button
+            type="button"
+            onClick={() => void loadMeta()}
+            className="btn-ghost w-fit border-error/50 text-error hover:border-error hover:bg-error-container"
+          >
+            Retry load
+          </button>
+        </div>
+      </PageShell>
     );
   }
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-content flex-col gap-section px-gutter-md py-gutter-xl sm:px-page-margin sm:py-section">
-      <header className="grid grid-cols-1 items-start gap-gutter-xl lg:grid-cols-12">
-        <AppHeader
-          title="Discover places worth the trip"
-          subtitle="Set your Bangalore neighborhood, budget, and cuisine to get five ranked restaurant picks with concise AI explanations."
-        />
-        <StatusPanel
-          catalogSize={meta.catalog_size}
-          locationCount={meta.location_count}
-          cuisineCount={meta.cuisine_count}
-          llmModel={meta.llm_model}
-          groqConnected={meta.groq_connected}
-        />
-      </header>
+    <PageShell>
+      <TopNav groqConnected={meta.groq_connected} />
+      <div className="flex flex-col gap-section">
+        <header className="grid grid-cols-1 items-start gap-gutter-xl lg:grid-cols-12">
+          <AppHeader
+            title="Places worth the trip"
+            subtitle="Set your Bangalore neighborhood, budget, and cuisine to get five ranked restaurant picks with concise AI explanations."
+          />
+          <StatusPanel
+            catalogSize={meta.catalog_size}
+            locationCount={meta.location_count}
+            cuisineCount={meta.cuisine_count}
+            llmModel={meta.llm_model}
+            groqConnected={meta.groq_connected}
+          />
+        </header>
 
-      {!meta.groq_connected ? (
-        <FallbackBanner
-          title="Fallback mode — Groq API key not set"
-          message="Recommendations will use rating-based ranking. Add LLM_API_KEY to the Python .env for AI ranking and explanations."
-        />
-      ) : null}
+        {!meta.groq_connected ? (
+          <FallbackBanner
+            title="Fallback mode — Groq API key not set"
+            message="Recommendations will use rating-based ranking. Add LLM_API_KEY on Railway for AI ranking and explanations."
+          />
+        ) : null}
 
-      <PreferencesForm
-        key={formKey}
-        locations={meta.locations}
-        cuisines={meta.cuisines}
-        loading={submitting}
-        onSubmit={handleSubmit}
-      />
-
-      {submitError ? (
-        <ErrorBanner
-          title="Something went wrong while generating recommendations"
-          message={submitError}
+        <PreferencesForm
+          key={formKey}
+          locations={meta.locations}
+          cuisines={meta.cuisines}
+          loading={submitting}
+          onSubmit={handleSubmit}
         />
-      ) : null}
 
-      {response ? (
-        <RecommendationList
-          response={response}
-          location={lastLocation}
-          onReset={handleReset}
-        />
-      ) : null}
-    </div>
+        {submitError ? (
+          <ErrorBanner
+            title="Something went wrong while generating recommendations"
+            message={submitError}
+          />
+        ) : null}
+
+        {response ? (
+          <RecommendationList
+            response={response}
+            location={lastLocation}
+            onReset={handleReset}
+          />
+        ) : null}
+      </div>
+    </PageShell>
   );
 }
