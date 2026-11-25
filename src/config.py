@@ -43,7 +43,12 @@ class Settings:
 
 def get_settings() -> Settings:
     """Load settings from `.env` / process environment."""
-    regex = os.getenv("CORS_ORIGIN_REGEX", "").strip() or None
+    # Default allows Vercel prod + preview URLs; override/disable with CORS_ORIGIN_REGEX.
+    # Set CORS_ORIGIN_REGEX= (empty) only if you want exact CORS_ORIGINS alone.
+    if "CORS_ORIGIN_REGEX" in os.environ:
+        regex = os.getenv("CORS_ORIGIN_REGEX", "").strip() or None
+    else:
+        regex = r"https://.*\.vercel\.app"
     return Settings(
         llm_api_key=os.getenv("LLM_API_KEY", ""),
         llm_model=os.getenv("LLM_MODEL", "openai/gpt-oss-20b"),
