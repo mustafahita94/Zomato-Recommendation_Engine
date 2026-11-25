@@ -1,0 +1,399 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discover — Places Worth the Trip</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'primary': '#FB7185',
+        'on-primary': '#400010',
+        'primary-deep': '#C94B60',
+        'primary-container': '#400010',
+        'on-primary-container': '#FFDADC',
+        'secondary': '#FDBA74',
+        'on-secondary': '#2C1600',
+        'secondary-container': '#492900',
+        'on-secondary-container': '#FFDCBD',
+        'success': '#4ADE80',
+        'on-success': '#00210C',
+        'success-container': '#003919',
+        'on-success-container': '#C4FFCD',
+        'error': '#FF897D',
+        'on-error': '#410002',
+        'error-container': '#690005',
+        'on-error-container': '#FFDAD6',
+        'surface-base': '#0B0F14',
+        'surface-canvas': '#0D1219',
+        'surface': '#151B24',
+        'surface-elevated': '#1A222E',
+        'surface-input': '#0F151E',
+        'on-surface': '#E8EEF7',
+        'on-surface-muted': '#9AA8BC',
+        'outline': '#2B3442',
+        'outline-strong': '#3A4658',
+      },
+      borderRadius: {
+        'sm': '8px',
+        'DEFAULT': '12px',
+        'md': '16px',
+        'lg': '20px',
+        'full': '9999px',
+      },
+      spacing: {
+        'gutter-xs': '4px',
+        'gutter-sm': '8px',
+        'gutter-md': '16px',
+        'gutter-lg': '24px',
+        'gutter-xl': '32px',
+        'section': '48px',
+        'page-margin': '24px',
+      },
+      fontFamily: {
+        'display': ['"Sora"', 'sans-serif'],
+        'headline': ['"Sora"', 'sans-serif'],
+        'title': ['"Outfit"', 'sans-serif'],
+        'body': ['"Outfit"', 'sans-serif'],
+        'label': ['"Outfit"', 'sans-serif'],
+        'mono': ['"Space Mono"', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['44px', { lineHeight: '50px', letterSpacing: '-0.9px', fontWeight: '600' }],
+        'display-lg-mobile': ['30px', { lineHeight: '36px', letterSpacing: '-0.6px', fontWeight: '600' }],
+        'headline-lg': ['24px', { lineHeight: '32px', letterSpacing: '-0.4px', fontWeight: '600' }],
+        'headline-md': ['20px', { lineHeight: '28px', letterSpacing: '-0.25px', fontWeight: '600' }],
+        'title-md': ['17px', { lineHeight: '24px', letterSpacing: '-0.1px', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '25px', letterSpacing: '0px', fontWeight: '400' }],
+        'body-md': ['14px', { lineHeight: '22px', letterSpacing: '0px', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0.1px', fontWeight: '600' }],
+        'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.3px', fontWeight: '500' }],
+        'mono-sm': ['12px', { lineHeight: '18px', letterSpacing: '0px', fontWeight: '400' }],
+      },
+      transitionDuration: {
+        'state-change': '120ms',
+        'surface-enter': '220ms',
+      },
+      transitionDelay: {
+        'state-change': '0ms',
+        'surface-enter': '0ms',
+      },
+      transitionTimingFunction: {
+        'state-change': 'ease-out',
+        'surface-enter': 'cubic-bezier(0.2, 0, 0, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&amp;family=Sora:wght@600&amp;family=Space+Mono&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>
+    .material-symbols-outlined, .material-symbols-rounded, .material-symbols-sharp, .material-icons {
+      display: inline-block; width: 1em; height: 1em; line-height: 1 !important;
+      box-sizing: content-box; overflow: hidden; white-space: nowrap; direction: ltr; vertical-align: middle;
+    }
+    .ambient-canvas {
+      background-color: #0B0F14;
+      background-image:
+        radial-gradient(ellipse 65% 40% at 15% 0%, rgba(251, 113, 133, 0.08), transparent 70%),
+        radial-gradient(ellipse 55% 35% at 85% 6%, rgba(253, 186, 116, 0.06), transparent 70%),
+        linear-gradient(180deg, #0B0F14 0%, #0D1219 100%);
+    }
+  </style>
+</head>
+<body class="ambient-canvas text-on-surface font-body antialiased">
+  <div class="min-h-[1024px] w-full" data-stitch-vh="min-h-[1024px]===min-h-screen">
+    <div class="max-w-[1120px] mx-auto px-gutter-md sm:px-page-margin py-gutter-xl sm:py-section flex flex-col gap-section">
+
+      <!-- AppHeader / Hero -->
+      <header class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-xl items-start">
+        <div class="lg:col-span-8 flex flex-col gap-gutter-md">
+          <div class="flex items-center gap-gutter-sm">
+            <span class="font-display text-title-md text-on-surface tracking-tight" data-design-text-token="title-md">Discover</span>
+            <span class="text-outline-strong" aria-hidden="true">/</span>
+            <span class="font-label text-label-sm uppercase tracking-wider text-primary" data-design-text-token="label-sm">AI restaurant recommender</span>
+          </div>
+          <h1 class="font-display text-display-lg-mobile lg:text-display-lg text-on-surface text-balance" data-design-text-token="display-lg">
+            Discover places worth the trip
+          </h1>
+          <p class="font-body text-body-lg text-on-surface-muted max-w-prose text-pretty" data-design-text-token="body-lg">
+            Set your Bangalore neighborhood, budget, and cuisine to get five ranked restaurant picks with concise AI explanations.
+          </p>
+        </div>
+
+        <!-- Secondary Compact StatusPanel -->
+        <aside class="lg:col-span-4 w-full">
+          <article data-component-id="card-action" data-component-type="card" data-component-variant="action" class="p-gutter-md rounded-md bg-surface border border-outline flex flex-col gap-gutter-sm">
+            <header class="flex items-center justify-between pb-gutter-xs border-b border-outline">
+              <h2 data-design-text-token="label-lg" class="font-label text-label-lg text-on-surface">Catalog &amp; LLM</h2>
+              <div class="flex items-center gap-gutter-xs">
+                <span data-component-id="badge-dot" data-component-type="badge" data-component-variant="success" role="status" aria-label="Connected" class="inline-block w-2 h-2 rounded-full bg-success"></span>
+                <span data-design-text-token="label-sm" class="font-label text-label-sm text-success">Connected</span>
+              </div>
+            </header>
+            <div class="flex flex-col gap-gutter-xs">
+              <div class="flex items-center justify-between">
+                <span data-design-text-token="label-sm" class="font-label text-label-sm text-on-surface-muted">Catalog size</span>
+                <span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-on-surface tabular-nums">51,717 places</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span data-design-text-token="label-sm" class="font-label text-label-sm text-on-surface-muted">Locations · Cuisines</span>
+                <span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-on-surface tabular-nums">93 · 107</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span data-design-text-token="label-sm" class="font-label text-label-sm text-on-surface-muted">LLM model</span>
+                <span data-design-text-token="mono-sm" class="font-mono text-mono-sm text-on-surface">llama-3.3-70b</span>
+              </div>
+            </div>
+          </article>
+        </aside>
+      </header>
+
+      <!-- PreferencesForm Section -->
+      <section aria-labelledby="preferences-heading" class="p-gutter-lg sm:p-gutter-xl rounded-lg bg-surface border border-outline-strong flex flex-col gap-gutter-lg">
+        <div class="flex flex-wrap items-center justify-between gap-gutter-sm">
+          <h2 id="preferences-heading" class="font-headline text-headline-md text-on-surface" data-design-text-token="headline-md">
+            Search preferences
+          </h2>
+          <span class="font-label text-label-sm text-on-surface-muted" data-design-text-token="label-sm">
+            Zomato Bangalore dataset · Groq ranking
+          </span>
+        </div>
+
+        <form id="discover-form" class="grid grid-cols-1 lg:grid-cols-3 gap-gutter-lg items-stretch" onsubmit="return false;">
+          <!-- Column 1: Location + Cuisine -->
+          <div class="flex flex-col gap-gutter-lg">
+            <label data-component-id="select-native" data-component-type="select" data-component-variant="native" class="flex flex-col gap-gutter-xs">
+              <span data-design-text-token="label-lg" class="font-label text-label-lg text-on-surface">Location</span>
+              <select id="location-select" required class="w-full rounded bg-surface-input border border-outline-strong text-on-surface font-body text-body-md px-gutter-md py-gutter-sm focus:border-primary focus:ring-1 focus:ring-primary transition-colors duration-state-change">
+                <option value="Bangalore" data-design-text-token="body-md">Bangalore (All neighborhoods)</option>
+                <option value="Indiranagar" selected data-design-text-token="body-md">Indiranagar</option>
+                <option value="Koramangala" data-design-text-token="body-md">Koramangala</option>
+                <option value="Jayanagar" data-design-text-token="body-md">Jayanagar</option>
+                <option value="Church Street" data-design-text-token="body-md">Church Street</option>
+                <option value="HSR Layout" data-design-text-token="body-md">HSR Layout</option>
+                <option value="Whitefield" data-design-text-token="body-md">Whitefield</option>
+              </select>
+              <span data-design-text-token="label-sm" class="font-label text-label-sm text-on-surface-muted">Required · neighborhood or city-wide</span>
+            </label>
+
+            <label data-component-id="select-native" data-component-type="select" data-component-variant="native" class="flex flex-col gap-gutter-xs">
+              <span data-design-text-token="label-lg" class="font-label text-label-lg text-on-surface">Cuisine</span>
+              <select id="cuisine-select" class="w-full rounded bg-surface-input border border-outline-strong text-on-surface font-body text-body-md px-gutter-md py-gutter-sm focus:border-primary focus:ring-1 focus:ring-primary transition-colors duration-state-change">
+                <option value="Any cuisine" data-design-text-token="body-md">Any cuisine</option>
+                <option value="North Indian" selected data-design-text-token="body-md">North Indian</option>
+                <option value="South Indian" data-design-text-token="body-md">South Indian</option>
+                <option value="Continental" data-design-text-token="body-md">Continental</option>
+                <option value="Asian" data-design-text-token="body-md">Asian</option>
+                <option value="Italian" data-design-text-token="body-md">Italian</option>
+              </select>
+              <span data-design-text-token="label-sm" class="font-label text-label-sm text-on-surface-muted">Optional · defaults to Any cuisine</span>
+            </label>
+          </div>
+
+          <!-- Column 2: Budget + Minimum Rating -->
+          <div class="flex flex-col gap-gutter-lg">
+            <label data-component-id="select-native" data-component-type="select" data-component-variant="native" class="flex flex-col gap-gutter-xs">
+              <span data-design-text-token="label-lg" class="font-label text-label-lg text-on-surface">Budget</span>
+              <select id="budget-select" class="w-full rounded bg-surface-input border border-outline-strong text-on-surface font-body text-body-md px-gutter-md py-gutter-sm focus:border-primary focus:ring-1 focus:ring-primary transition-colors duration-state-change">
+                <option value="Low" data-design-text-token="body-md">Low ≤ ₹300 for two</option>
+                <option value="Medium" selected data-design-text-token="body-md">Medium ₹301–₹600</option>
+                <option value="High" data-design-text-token="body-md">High &gt; ₹600</option>
+              </select>
+              <span data-design-text-token="label-sm" class="font-label text-label-sm text-on-surface-muted">Estimated cost for two diners</span>
+            </label>
+
+            <label data-component-id="slider-continuous" data-component-type="slider" data-component-variant="continuous" class="flex flex-col gap-gutter-sm pt-gutter-xs">
+              <div class="flex items-center justify-between">
+                <span data-design-text-token="label-lg" class="font-label text-label-lg text-on-surface">Minimum rating</span>
+                <span id="rating-readout" data-design-text-token="mono-sm" class="font-mono text-mono-sm text-secondary tabular-nums px-gutter-sm py-gutter-xs rounded-full bg-surface-elevated border border-outline">4.0</span>
+              </div>
+              <input id="rating-slider" type="range" min="0" max="5" value="4.0" step="0.1" class="w-full h-2 rounded-full bg-surface-elevated accent-primary cursor-pointer">
+              <div class="flex items-center justify-between text-on-surface-muted">
+                <span data-design-text-token="label-sm" class="font-label text-label-sm">0.0</span>
+                <span data-design-text-token="label-sm" class="font-label text-label-sm">5.0</span>
+              </div>
+            </label>
+          </div>
+
+          <!-- Column 3: Additional Preferences + Full-width CTA -->
+          <div class="flex flex-col justify-between gap-gutter-md">
+            <label data-component-id="input-field-textarea" data-component-type="input-field" data-component-variant="textarea" class="flex flex-col gap-gutter-xs">
+              <div class="flex items-center justify-between">
+                <span data-design-text-token="label-lg" class="font-label text-label-lg text-on-surface">Additional preferences</span>
+                <span data-design-text-token="label-sm" class="font-label text-label-sm text-on-surface-muted">Optional</span>
+              </div>
+              <textarea id="extra-prefs" rows="3" maxlength="500" placeholder="family-friendly, quick service, outdoor seating..." class="w-full rounded bg-surface-input border border-outline-strong text-on-surface placeholder:text-on-surface-muted font-body text-body-md px-gutter-md py-gutter-sm focus:border-primary focus:ring-1 focus:ring-primary transition-colors duration-state-change resize-none">quiet corner, good for conversation</textarea>
+              <span data-design-text-token="label-sm" class="font-label text-label-sm text-on-surface-muted">Up to 500 characters</span>
+            </label>
+
+            <!-- COMPONENT: button-with-icon -->
+            <button id="submit-btn" data-component-id="button-with-icon" data-component-type="button" data-component-variant="with-icon" type="submit" class="w-full inline-flex items-center justify-center gap-gutter-sm px-gutter-lg py-gutter-md rounded bg-primary text-on-primary font-label text-label-lg transition-transform duration-state-change ease-state-change hover:brightness-95 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+              <span class="material-symbols-outlined text-body-lg" aria-hidden="true">auto_awesome</span>
+              <span data-design-text-token="label-lg">Get recommendations</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ResultsSection (Success) -->
+      <main aria-labelledby="results-heading" class="flex flex-col gap-gutter-lg">
+        <div class="flex flex-wrap items-baseline justify-between gap-gutter-sm">
+          <h2 id="results-heading" class="font-headline text-headline-lg text-on-surface" data-design-text-token="headline-lg">
+            Top 5 picks in Indiranagar
+          </h2>
+          <span class="font-mono text-mono-sm text-on-surface-muted tabular-nums" data-design-text-token="mono-sm">
+            Sorted by AI match
+          </span>
+        </div>
+
+        <!-- SummaryBanner -->
+        <div role="region" aria-label="AI summary banner" data-component-id="banner-info" data-component-type="banner" data-component-variant="info" class="flex items-start gap-gutter-md p-gutter-md rounded-md bg-surface-elevated border border-outline-strong">
+          <span class="material-symbols-outlined text-primary text-headline-md mt-0.5 shrink-0" aria-hidden="true">auto_awesome</span>
+          <div class="flex flex-col gap-gutter-xs">
+            <h3 data-design-text-token="title-md" class="font-title text-title-md text-on-surface">AI overview</h3>
+            <p data-design-text-token="body-md" class="font-body text-body-md text-on-surface-muted text-pretty">
+              Prioritized calm, conversation-friendly Indiranagar dining rooms with North Indian and adjacent crowd-pleasers around ₹450–₹600 for two.
+            </p>
+          </div>
+        </div>
+
+        <!-- RecommendationList (Top 5) -->
+        <div class="flex flex-col gap-gutter-md">
+          <!-- #1 Truffles -->
+          <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="p-gutter-lg rounded-lg bg-surface border border-outline-strong flex flex-col gap-gutter-md">
+            <header class="flex items-start justify-between gap-gutter-md">
+              <div class="flex items-start gap-gutter-md">
+                <span data-design-text-token="mono-sm" class="inline-flex items-center justify-center px-gutter-sm py-gutter-xs rounded-full bg-primary-container border border-primary/40 text-on-primary-container font-mono text-mono-sm tabular-nums shrink-0">#1</span>
+                <div class="flex flex-col gap-gutter-xs">
+                  <h3 data-design-text-token="headline-md" class="font-headline text-headline-md text-on-surface">Truffles</h3>
+                  <p data-design-text-token="body-md" class="font-body text-body-md text-on-surface-muted">Continental · Indiranagar · ₹≈600 for two</p>
+                </div>
+              </div>
+              <span class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded-full bg-secondary-container border border-secondary/30 text-secondary font-mono text-mono-sm tabular-nums shrink-0">
+                <span class="material-symbols-outlined text-label-sm" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">star</span>
+                <span data-design-text-token="mono-sm">4.5</span>
+              </span>
+            </header>
+            <hr class="border-outline">
+            <div>
+              <p data-design-text-token="body-lg" class="font-body text-body-lg text-on-surface text-pretty">High rating and medium budget fit; strong match for a relaxed dinner.</p>
+            </div>
+          </article>
+
+          <!-- #2 Copper Chimney -->
+          <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="p-gutter-lg rounded-lg bg-surface border border-outline-strong flex flex-col gap-gutter-md">
+            <header class="flex items-start justify-between gap-gutter-md">
+              <div class="flex items-start gap-gutter-md">
+                <span data-design-text-token="mono-sm" class="inline-flex items-center justify-center px-gutter-sm py-gutter-xs rounded-full bg-primary-container border border-primary/40 text-on-primary-container font-mono text-mono-sm tabular-nums shrink-0">#2</span>
+                <div class="flex flex-col gap-gutter-xs">
+                  <h3 data-design-text-token="headline-md" class="font-headline text-headline-md text-on-surface">Copper Chimney</h3>
+                  <p data-design-text-token="body-md" class="font-body text-body-md text-on-surface-muted">North Indian · Indiranagar · ₹≈550 for two</p>
+                </div>
+              </div>
+              <span class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded-full bg-secondary-container border border-secondary/30 text-secondary font-mono text-mono-sm tabular-nums shrink-0">
+                <span class="material-symbols-outlined text-label-sm" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">star</span>
+                <span data-design-text-token="mono-sm">4.4</span>
+              </span>
+            </header>
+            <hr class="border-outline">
+            <div>
+              <p data-design-text-token="body-lg" class="font-body text-body-lg text-on-surface text-pretty">Direct North Indian cuisine match with booth seating and subdued acoustics suited for unhurried conversation.</p>
+            </div>
+          </article>
+
+          <!-- #3 Burma Burma -->
+          <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="p-gutter-lg rounded-lg bg-surface border border-outline-strong flex flex-col gap-gutter-md">
+            <header class="flex items-start justify-between gap-gutter-md">
+              <div class="flex items-start gap-gutter-md">
+                <span data-design-text-token="mono-sm" class="inline-flex items-center justify-center px-gutter-sm py-gutter-xs rounded-full bg-primary-container border border-primary/40 text-on-primary-container font-mono text-mono-sm tabular-nums shrink-0">#3</span>
+                <div class="flex flex-col gap-gutter-xs">
+                  <h3 data-design-text-token="headline-md" class="font-headline text-headline-md text-on-surface">Burma Burma</h3>
+                  <p data-design-text-token="body-md" class="font-body text-body-md text-on-surface-muted">Asian · Indiranagar · ₹≈580 for two</p>
+                </div>
+              </div>
+              <span class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded-full bg-secondary-container border border-secondary/30 text-secondary font-mono text-mono-sm tabular-nums shrink-0">
+                <span class="material-symbols-outlined text-label-sm" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">star</span>
+                <span data-design-text-token="mono-sm">4.6</span>
+              </span>
+            </header>
+            <hr class="border-outline">
+            <div>
+              <p data-design-text-token="body-lg" class="font-body text-body-lg text-on-surface text-pretty">Consistently calm 100 Feet Road dining room with attentive pacing and well-spaced corner tables.</p>
+            </div>
+          </article>
+
+          <!-- #4 Tandooriwala -->
+          <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="p-gutter-lg rounded-lg bg-surface border border-outline-strong flex flex-col gap-gutter-md">
+            <header class="flex items-start justify-between gap-gutter-md">
+              <div class="flex items-start gap-gutter-md">
+                <span data-design-text-token="mono-sm" class="inline-flex items-center justify-center px-gutter-sm py-gutter-xs rounded-full bg-primary-container border border-primary/40 text-on-primary-container font-mono text-mono-sm tabular-nums shrink-0">#4</span>
+                <div class="flex flex-col gap-gutter-xs">
+                  <h3 data-design-text-token="headline-md" class="font-headline text-headline-md text-on-surface">Phobidden Fruit</h3>
+                  <p data-design-text-token="body-md" class="font-body text-body-md text-on-surface-muted">Asian · Indiranagar · ₹≈500 for two</p>
+                </div>
+              </div>
+              <span class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded-full bg-secondary-container border border-secondary/30 text-secondary font-mono text-mono-sm tabular-nums shrink-0">
+                <span class="material-symbols-outlined text-label-sm" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">star</span>
+                <span data-design-text-token="mono-sm">4.3</span>
+              </span>
+            </header>
+            <hr class="border-outline">
+            <div>
+              <p data-design-text-token="body-lg" class="font-body text-body-lg text-on-surface text-pretty">Tucked into 12th Main with warm low lighting and quiet garden-side corners ideal for evening catch-ups.</p>
+            </div>
+          </article>
+
+          <!-- #5 Glen's Bakehouse -->
+          <article data-component-id="card-elevated" data-component-type="card" data-component-variant="elevated" class="p-gutter-lg rounded-lg bg-surface border border-outline-strong flex flex-col gap-gutter-md">
+            <header class="flex items-start justify-between gap-gutter-md">
+              <div class="flex items-start gap-gutter-md">
+                <span data-design-text-token="mono-sm" class="inline-flex items-center justify-center px-gutter-sm py-gutter-xs rounded-full bg-primary-container border border-primary/40 text-on-primary-container font-mono text-mono-sm tabular-nums shrink-0">#5</span>
+                <div class="flex flex-col gap-gutter-xs">
+                  <h3 data-design-text-token="headline-md" class="font-headline text-headline-md text-on-surface">Punjabi By Nature</h3>
+                  <p data-design-text-token="body-md" class="font-body text-body-md text-on-surface-muted">North Indian · Indiranagar · ₹≈600 for two</p>
+                </div>
+              </div>
+              <span class="inline-flex items-center gap-gutter-xs px-gutter-sm py-gutter-xs rounded-full bg-secondary-container border border-secondary/30 text-secondary font-mono text-mono-sm tabular-nums shrink-0">
+                <span class="material-symbols-outlined text-label-sm" style="font-variation-settings: &#39;FILL&#39; 1;" aria-hidden="true">star</span>
+                <span data-design-text-token="mono-sm">4.1</span>
+              </span>
+            </header>
+            <hr class="border-outline">
+            <div>
+              <p data-design-text-token="body-lg" class="font-body text-body-lg text-on-surface text-pretty">Reliable North Indian classics at the top of your medium budget with comfortable indoor seating.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Footer MetaCaption -->
+        <footer class="pt-gutter-sm border-t border-outline flex flex-wrap items-center justify-between gap-gutter-sm">
+          <p class="font-mono text-mono-sm text-on-surface-muted tabular-nums" data-design-text-token="mono-sm">
+            148 candidates considered · Indiranagar · North Indian · Medium · ≥4.0 · 420ms
+          </p>
+          <span class="font-label text-label-sm text-on-surface-muted" data-design-text-token="label-sm">
+            Discover · Bangalore
+          </span>
+        </footer>
+      </main>
+
+    </div>
+  </div>
+
+  <script>
+    const slider = document.getElementById('rating-slider');
+    const readout = document.getElementById('rating-readout');
+    if (slider && readout) {
+      slider.addEventListener('input', () => {
+        readout.textContent = parseFloat(slider.value).toFixed(1);
+      });
+    }
+  </script>
+
+
+</body></html>

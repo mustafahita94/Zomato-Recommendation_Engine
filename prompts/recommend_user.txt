@@ -1,0 +1,11 @@
+User preferences (JSON):
+{{preferences_json}}
+
+Candidate restaurants (JSON array — this is the only allowed recommendation universe):
+{{candidates_json}}
+
+Task:
+1. Rank the best matches for these preferences.
+2. Write a brief explanation for each pick that references the preferences.
+3. Optionally include a short overall summary.
+4. Output JSON matching the required schema only.

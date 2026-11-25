@@ -1,0 +1,2 @@
+# Force Python only — repo also has web/package.json (Next.js on Vercel).
+providers = ["python"]
